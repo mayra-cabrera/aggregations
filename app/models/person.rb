@@ -9,8 +9,8 @@ class Person < ActiveRecord::Base
   end
 
   def self.managers_by_average_salary_difference
-    joins("LEFT JOIN people employees ON employees.manager_id = people.id").
-    group("people.name").
-    average("employees.salary")
+    select("people.name, AVG(people.salary) as avg_people_salary").
+      joins(:employees).
+      group("people.manager_id, people.name").order("avg_people_salary")
   end
 end
