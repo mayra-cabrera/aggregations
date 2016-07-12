@@ -40,7 +40,6 @@ describe Person do
         create(:person, manager: manager, salary: salary - difference * 2)
         create(:person, manager: manager, salary: salary - difference * 3)
       end
-      binding.pry
       result = Person.managers_by_average_salary_difference
       expect(result.map(&:name)).to eq(%w(
         difference-20000
